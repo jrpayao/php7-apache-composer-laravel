@@ -12,3 +12,20 @@ services:
     entrypoint: [ "/bin/sh" , "/var/www/localhost/htdocs/entrypoint/example.sh" ]
     tty: true
     restart: on-failure
+    networks:
+      - exemplo
+  db:
+    image: postgres:alpine
+    container_name: db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: db_exemplo
+      POSTGRES_USER: exemplo
+      POSTGRES_PASSWORD: exemplo
+    ports:
+      - 5430:5432
+    tty: true
+    networks:
+      - exemplo
+networks:
+  exemplo:
